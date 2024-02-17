@@ -41,3 +41,24 @@ body {
     background: #6c63ff;
     color: #fff;
 }
+
+.modal-header {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.modal-title {
+    font-weight: bold;
+}
+
+.modal-body {
+    padding: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-control {
+    border-radius: 0.25rem;
+}
