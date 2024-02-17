@@ -4,7 +4,7 @@
  */
 
 
-// RF3 - Resaltar contacto buscado
+// RF2 - Mostrar modal con datos de contacto
 $(document).ready(function() {
     console.log("hola")
   $("#btnBuscar").click(function() {
@@ -18,12 +18,10 @@ $(document).ready(function() {
 });
 
 
-// RF2 - Mostrar modal con datos de contacto
+// RF3 - resaltar en la lista 
 $("#contactos .contact-card").click(function() { 
 
-  var infoContacto = obtenerInfoContacto($(this)); //trae los datos
-
-  mostrarModal(infoContacto); //muestra modal
+ 
 
 });
 
