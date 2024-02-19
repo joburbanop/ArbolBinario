@@ -8,29 +8,39 @@ package mundo;
  *
  * @author jonathan
  */
-public class Contacto {
+public class Contacto implements Comparable {
+
     /*-------------------------------------------------
      * Atributos 
      *--------------------------------------------*/
-    
     private String id;
-    
+
     private String celular;
-    
-    private String nombre;
-    
+
+    String nombre;
+
     private String apellido;
-    
+
     private String correo;
-    
+
     private String direccion;
-    
-    
+
+    private String cedula;
+
+    /**
+     * Sub�rbol izquierdo de contactos
+     */
+    private Contacto izquierda;
+
+    /**
+     * Sub�rbol derecho de contactos
+     */
+    private Contacto derecha;
+
     /*------------------------------------------------------
      * Metodos
      *-----------------------------------------------------*/
-    
-    /* *
+ /* *
      * constructor de la clase Contacto.
      * @param id
      * @param celular
@@ -39,8 +49,8 @@ public class Contacto {
      * @param correo
      * @param direccion 
      */
-
-    public Contacto(String id, String celular, String nombre, String apellido, String correo, String direccion) {
+    public Contacto(String id, String celular, String nombre, String apellido, String correo, String cedula, String direccion) {
+        this.cedula = cedula;
         this.id = id;
         this.celular = celular;
         this.nombre = nombre;
@@ -49,7 +59,30 @@ public class Contacto {
         this.direccion = direccion;
     }
 
-   
+    public String getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
+    }
+
+    public Contacto getIzquierda() {
+        return izquierda;
+    }
+
+    public void setIzquierda(Contacto izquierda) {
+        this.izquierda = izquierda;
+    }
+
+    public Contacto getDerecha() {
+        return derecha;
+    }
+
+    public void setDerecha(Contacto derecha) {
+        this.derecha = derecha;
+    }
+
     public Contacto() {
     }
 
@@ -99,6 +132,12 @@ public class Contacto {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Contacto otro = (Contacto) o;
+        return nombre.compareToIgnoreCase(otro.nombre);
     }
 
 }
