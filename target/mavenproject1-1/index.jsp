@@ -4,6 +4,9 @@
     Author     : jonathan
 --%>
 
+<%@page import="mundo.Contacto"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="mundo.Directorio"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -36,27 +39,27 @@
                         <form action="SvAgregar"  method="POST" >
 
                             <div class="mb-3">
-                                <input class="form-control" type="text" placeholder="Nombre" required>
+                                <input class="form-control" type="text" name="nombre" placeholder="Nombre" required>
                             </div>
 
                             <div class="mb-3">
-                                <input class="form-control" type="text" placeholder="Apellido" required>
+                                <input class="form-control" type="text" name="apellido"  placeholder="Apellido" required>
                             </div>
 
                             <div class="mb-3">
-                                <input class="form-control" type="email" placeholder="Email" required>
+                                <input class="form-control" type="email" name="correo"  placeholder="Email" required>
                             </div>
 
                             <div class="mb-3">
-                                <input class="form-control" type="number" placeholder="Cedula" required >
+                                <input class="form-control" type="number" name="cedula" placeholder="Cedula" required >
                             </div>
 
                             <div class="mb-3">
-                                <input class="form-control" type="number" placeholder="Celular" pattern="[0-9]{10}" required>
+                                <input class="form-control" type="number" name="celular" placeholder="Celular" pattern="[0-9]{10}" required>
                             </div>
 
                             <div class="mb-3">
-                                <input class="form-control" type="text" placeholder="Direccion" required>
+                                <input class="form-control" type="text" name="direccion" placeholder="Direccion" required>
                             </div>
 
                             <button type="submit" class="btn btn-primary">
@@ -92,44 +95,47 @@
                             </button>
                         </div>
                     </div>
-
+                  
+                    <!-- ********************************************************** -->
                     <!-- cumplimineto de RF4 y mostrar informacion -->   
+                    <!-- ********************************************************** -->
                     <div id="contactos" class="row">
-
+                        <%        
+                            ArrayList<Contacto> contactos = (ArrayList<Contacto>) request.getAttribute("contactos");
+                            //System.out.println("DESDE INDE.JSP");
+                            //System.out.println(contactos != null);
+                            if (contactos != null) {
+                                for (Contacto concargar : contactos) {
+                        %>
                         <div class="col-md-6 animate__animated animate__fadeInLeft">
                             <div class="card contact-card">
-
                                 <div class="card-body">
                                     <h5 class="card-title">
-                                        Maria Gomez <span class="badge bg-primary">Editar</span>
+                                        <%= concargar.getNombre() + " " + concargar.getApellido()%> <span class="badge bg-primary">Editar</span>
                                     </h5>
-                                    <p class="card-text">mariag@email.com</p>
+                                    <p class="card-text"><%= concargar.getCorreo()%></p>
                                     <a href="#" class="btn btn-danger btn-sm">
                                         <i class="fas fa-trash"></i> Eliminar
                                     </a>
                                 </div>
-
                             </div>
                         </div>
-
-                        <div class="col-md-6 animate__animated animate__fadeInRight">
-                            <div class="card contact-card">
-
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                        Pedro Torres <span class="badge bg-primary">Editar</span>
-                                    </h5>
-                                    <p class="card-text">pedro.torres@email.com</p>
-                                    <a href="#" class="btn btn-danger btn-sm">
-                                        <i class="fas fa-trash"></i> Eliminar 
-                                    </a>
-                                </div>
-
-                            </div>
+                        <%
+                            } 
+                        } else {
+                        %>
+                        <div class="col-md-12">
+                            <p>No hay contactos disponibles.</p>
                         </div>
-
+                        <%
+                            } 
+                        %> 
                     </div>
 
+
+
+
+                    
                 </div>
             </section>
 

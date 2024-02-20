@@ -10,17 +10,18 @@ import java.util.ArrayList;
  *
  * @author jonathan
  */
-public class Directorio  {
+public class Directorio {
 
     /*---------------------------------------------------------------------------------
     *Atributos
     *-----------------------------------------------------------------------------------*/
-    private ArrayList<Contacto> contactos;
+    private ArrayList<Contacto> contactos = new ArrayList<>();
+    ;
 
     /**
      * Raiz del arbol de contactos presentes en el directorio
      */
-    private Contacto contactoRaiz;
+    private Contacto contactoRaiz = null;
 
     /**
      * Nomero de contactos en el directorio
@@ -30,63 +31,63 @@ public class Directorio  {
     /*-------------------------------------------------------------------------------------
     *Metodos
     *-------------------------------------------------------------------------------------*/
-    
-    
-    
     /**
-     * 
+     *
      * @param id
      * @param celular
      * @param nombre
      * @param apellido
      * @param correo
      * @param cedula
-     * @param direccion 
+     * @param direccion
      */
     public void agregarContacto(String id, String celular, String nombre, String apellido, String correo, String cedula, String direccion) {
-        Contacto c= new Contacto(id, celular, nombre, apellido, correo, cedula,direccion);
+        Contacto c = new Contacto(id, celular, nombre, apellido, correo, cedula, direccion);
+
         if (contactoRaiz == null) {
+            System.out.println("cabeza");
+            System.out.println();
             contactoRaiz = c;
+            agregarContacto(c);
         } else {
-            insertar(c);
+            System.out.println("ha incertar");
+            System.out.println();
+            insertar(contactoRaiz,c);
         }
         numContactos++;
-        
+
     }
 
-    
-    
     /**
-     * 
-     * @param nuevo 
+     *
+     * @param nuevo
      */
-    public void insertar(Contacto nuevo){
-        Contacto c=new Contacto();
+    public void insertar(Contacto actual, Contacto nuevo) {
         
-        if (c.compareTo(nuevo) == 0) {
-            //throw new ContactoRepetidoException(nuevo.nombre);
-        }
-
-        if (c.compareTo(nuevo) > 0) {
-            // Debe agregar el nuevo contacto por el sub�rbol izquierdo
-            if ( c.getIzquierda() == null) {
-                c.setIzquierda(nuevo); 
+        if (nuevo.compareTo(actual) <= 0) {
+            // El nuevo contacto es menor o igual que el actual, entonces va al subárbol izquierdo
+            if (actual.getIzquierda() == null) {
+                actual.setIzquierda(nuevo);
+                contactos.add(contactos.indexOf(actual),nuevo);
             } else {
-                insertar(nuevo);
+                //System.out.println("menor entonces izquierda "+actual.getIzquierda());
+                insertar(actual.getIzquierda(), nuevo);
             }
         } else {
-            // Debe agregar el nuevo contacto por el sub�rbol derecho
-            if (c.getDerecha() == null) {
-                c.setDerecha(nuevo);
+            
+            // El nuevo contacto es mayor que el actual, entonces va al subárbol derecho
+            if (actual.getDerecha() == null) {
+                //System.out.println("mayor  entonces izquierda "+actual.getIzquierda());
+                actual.setDerecha(nuevo);
+                contactos.add(contactos.indexOf(actual)+1,nuevo);
             } else {
-                insertar(nuevo);
+                insertar(actual.getDerecha(), nuevo);
             }
         }
     }
 
-    
     public Contacto buscarContacto(String id) {
-       
+
         return null;
     }
 
@@ -98,5 +99,13 @@ public class Directorio  {
         return null;
     }
 
-   
+    // Método para agregar un contacto al directorio
+    public void agregarContacto(Contacto contacto) {
+        contactos.add(contacto);
+    }
+
+    // Método para obtener la lista de contactos
+    public ArrayList<Contacto> obtenerContactos() {
+        return contactos;
+    }
 }

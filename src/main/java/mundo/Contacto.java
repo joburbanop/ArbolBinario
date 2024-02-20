@@ -8,7 +8,7 @@ package mundo;
  *
  * @author jonathan
  */
-public class Contacto implements Comparable {
+public class Contacto implements Comparable<Contacto> {
 
     /*-------------------------------------------------
      * Atributos 
@@ -17,7 +17,7 @@ public class Contacto implements Comparable {
 
     private String celular;
 
-    String nombre;
+    private String nombre;
 
     private String apellido;
 
@@ -26,6 +26,8 @@ public class Contacto implements Comparable {
     private String direccion;
 
     private String cedula;
+    
+    private static Contacto instancia = null;
 
     /**
      * Sub�rbol izquierdo de contactos
@@ -134,10 +136,18 @@ public class Contacto implements Comparable {
         this.direccion = direccion;
     }
 
+   /**
+    * Compara este contacto con otro
+    
+    * @param o o es el otro contacto con el que se compara
+    * @return -1 si este contacto es menor al otro, 0 si son iguales y 1 si este contacto es mayor al otro
+    */
     @Override
-    public int compareTo(Object o) {
+    public int compareTo(Contacto o) {
         Contacto otro = (Contacto) o;
-        return nombre.compareToIgnoreCase(otro.nombre);
+        System.out.println("haber");
+        System.out.println(this.nombre.compareToIgnoreCase(otro.getNombre()));
+        return this.nombre.compareToIgnoreCase(otro.getNombre());
     }
 
 }
