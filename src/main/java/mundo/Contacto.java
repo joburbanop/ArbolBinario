@@ -4,6 +4,8 @@
  */
 package mundo;
 
+import java.util.Collection;
+
 /**
  *
  * @author jonathan
@@ -26,9 +28,8 @@ public class Contacto implements Comparable<Contacto> {
     private String direccion;
 
     private String cedula;
-    
-    private static Contacto instancia = null;
 
+    //private static Contacto instancia = null;
     /**
      * Sub�rbol izquierdo de contactos
      */
@@ -61,6 +62,9 @@ public class Contacto implements Comparable<Contacto> {
         this.direccion = direccion;
     }
 
+    public Contacto() {
+    }
+
     public String getCedula() {
         return cedula;
     }
@@ -83,9 +87,6 @@ public class Contacto implements Comparable<Contacto> {
 
     public void setDerecha(Contacto derecha) {
         this.derecha = derecha;
-    }
-
-    public Contacto() {
     }
 
     public String getId() {
@@ -136,18 +137,22 @@ public class Contacto implements Comparable<Contacto> {
         this.direccion = direccion;
     }
 
-   /**
-    * Compara este contacto con otro
-    
-    * @param o o es el otro contacto con el que se compara
-    * @return -1 si este contacto es menor al otro, 0 si son iguales y 1 si este contacto es mayor al otro
-    */
+    /**
+     * Compara este contacto con otro
+     *
+     * @param o o es el otro contacto con el que se compara
+     * @return -1 si este contacto es menor al otro, 0 si son iguales y 1 si
+     * este contacto es mayor al otro
+     */
     @Override
     public int compareTo(Contacto o) {
         Contacto otro = (Contacto) o;
-        System.out.println("haber");
-        System.out.println(this.nombre.compareToIgnoreCase(otro.getNombre()));
+        //System.out.println("haber");
+        //System.out.println(this.nombre.compareToIgnoreCase(otro.getNombre()));
         return this.nombre.compareToIgnoreCase(otro.getNombre());
     }
+
+    
+    
 
 }

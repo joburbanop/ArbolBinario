@@ -5,6 +5,7 @@
 package mundo;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  *
@@ -16,12 +17,11 @@ public class Directorio {
     *Atributos
     *-----------------------------------------------------------------------------------*/
     private ArrayList<Contacto> contactos = new ArrayList<>();
-    ;
 
     /**
      * Raiz del arbol de contactos presentes en el directorio
      */
-    private Contacto contactoRaiz = null;
+    public static Contacto contactoRaiz = null;
 
     /**
      * Nomero de contactos en el directorio
@@ -52,7 +52,7 @@ public class Directorio {
         } else {
             System.out.println("ha incertar");
             System.out.println();
-            insertar(contactoRaiz,c);
+            insertar(contactoRaiz, c);
         }
         numContactos++;
 
@@ -63,32 +63,52 @@ public class Directorio {
      * @param nuevo
      */
     public void insertar(Contacto actual, Contacto nuevo) {
-        
+
+        //System.out.println("insertar ya estamos ");
         if (nuevo.compareTo(actual) <= 0) {
             // El nuevo contacto es menor o igual que el actual, entonces va al subárbol izquierdo
             if (actual.getIzquierda() == null) {
                 actual.setIzquierda(nuevo);
-                contactos.add(contactos.indexOf(actual),nuevo);
+                contactos.add(contactos.indexOf(actual), nuevo);
             } else {
                 //System.out.println("menor entonces izquierda "+actual.getIzquierda());
                 insertar(actual.getIzquierda(), nuevo);
             }
         } else {
-            
+
             // El nuevo contacto es mayor que el actual, entonces va al subárbol derecho
             if (actual.getDerecha() == null) {
                 //System.out.println("mayor  entonces izquierda "+actual.getIzquierda());
                 actual.setDerecha(nuevo);
-                contactos.add(contactos.indexOf(actual)+1,nuevo);
+                contactos.add(contactos.indexOf(actual) + 1, nuevo);
             } else {
                 insertar(actual.getDerecha(), nuevo);
             }
         }
     }
 
-    public Contacto buscarContacto(String id) {
+    /**
+     * Implementacion recursiva para localizar un contacto en el arbol que
+     * comienza en este nodo
+     *
+     * @param actual es el nodo actual
+     * @param unNombre nombre que se va a buscar - unNombre != null
+     * @return contacto asociado al nombre. Si no lo encuentra retorna null;
+     */
+    public static Contacto buscar(Contacto actual, String unNombre) {
+       
+        if (actual == null || actual.getNombre().compareToIgnoreCase(unNombre) == 0) {
+            return actual;
+        }
 
-        return null;
+        
+        if (actual.getNombre().compareToIgnoreCase(unNombre) > 0) {
+            return buscar(actual.getIzquierda(), unNombre);
+
+        } 
+        else {
+            return buscar(actual.getDerecha(), unNombre);
+        }
     }
 
     public void eliminarContacto(String id) {
@@ -108,4 +128,5 @@ public class Directorio {
     public ArrayList<Contacto> obtenerContactos() {
         return contactos;
     }
+
 }

@@ -77,30 +77,20 @@
                 <div class="col-md-12">
                     <!-- div especializado en el cumplimiento de RF2, se mostrara un modal. o en caso de RF3 se remarcara en la tabla -->
                     <div class="input-group mb-3 animate__animated animate__fadeInUp">
-                        <div class="d-flex justify-content-end mb-3">
-                            <div class="form-check form-check-inline has-tooltip" data-toggle="tooltip" title="Muestra los datos completos del contacto seleccionado">
-                                <input class="form-check-input" type="radio" name="requerimiento" id="rf2" value="rf2" checked>
-                                <label class="form-check-label" for="rf2">Ver datos</label>
-                            </div>
-                            <div class="form-check form-check-inline has-tooltip" data-toggle="tooltip" title="Resalta en la lista el contacto buscado">
-                                <input class="form-check-input" type="radio" name="requerimiento" id="rf3" value="rf3">
-                                <label class="form-check-label" for="rf3">Buscar contacto</label>
-                            </div>
-                        </div>
 
                         <div class="input-group">
-                            <input id="buscar" class="form-control rounded-0" type="text" placeholder="Buscar contacto..." >
-                            <button id="btnBuscar" class="btn btn-primary rounded-0 search-btn">
+                            <input id="" class="form-control rounded-0" type="text" placeholder="Buscar contacto..." >
+                            <button id="" class="btn btn-primary rounded-0 search-btn">
                                 <i class="fas fa-search"></i>
                             </button>
                         </div>
                     </div>
-                  
+
                     <!-- ********************************************************** -->
                     <!-- cumplimineto de RF4 y mostrar informacion -->   
                     <!-- ********************************************************** -->
                     <div id="contactos" class="row">
-                        <%        
+                        <%
                             ArrayList<Contacto> contactos = (ArrayList<Contacto>) request.getAttribute("contactos");
                             //System.out.println("DESDE INDE.JSP");
                             //System.out.println(contactos != null);
@@ -111,31 +101,37 @@
                             <div class="card contact-card">
                                 <div class="card-body">
                                     <h5 class="card-title">
-                                        <%= concargar.getNombre() + " " + concargar.getApellido()%> <span class="badge bg-primary">Editar</span>
+                                        <%= concargar.getNombre() + " " + concargar.getApellido()%> 
                                     </h5>
-                                    <p class="card-text"><%= concargar.getCorreo()%></p>
-                                    <a href="#" class="btn btn-danger btn-sm">
-                                        <i class="fas fa-trash"></i> Eliminar
+                                    <p class="card-text"><strong>Correo: </strong>  <%= concargar.getCorreo()%></p>
+                                    <p class="card-text"><strong>Celular: </strong>  <%= concargar.getCelular()%></p>
+                                    <a href="#" class="btn btn-danger btn-sm"  >
+                                        <i class="fas fa-trash"></i>   
+
                                     </a>
+                                    <a href="#" class="btn btn-primary btn-sm btn-ojo" data-nombre="<%= concargar.getNombre()%>">
+                                        <span class="fas fa-eye"></span>
+                                    </a>
+
                                 </div>
                             </div>
                         </div>
                         <%
-                            } 
+                            }
                         } else {
                         %>
                         <div class="col-md-12">
                             <p>No hay contactos disponibles.</p>
                         </div>
                         <%
-                            } 
+                            }
                         %> 
                     </div>
 
 
 
 
-                    
+
                 </div>
             </section>
 
@@ -151,6 +147,7 @@
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
+
                         </div>
                         <div class="modal-body">
                             <div class="row">
@@ -190,6 +187,8 @@
 
         </main>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
         <script src="./static/js/scripts.js"></script>

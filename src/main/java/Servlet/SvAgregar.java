@@ -43,6 +43,7 @@ public class SvAgregar extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
          // Obtiene los parámetros del formulario
         String celular = request.getParameter("celular");
         String nombre = request.getParameter("nombre");
@@ -51,13 +52,13 @@ public class SvAgregar extends HttpServlet {
         String cedula = request.getParameter("cedula");
         String direccion = request.getParameter("direccion");
 
-        System.out.println("celular " + celular);
-        System.out.println("apellido " + apellido);
-        System.out.println("correo " + correo);
+        //System.out.println("celular " + celular);
+        //System.out.println("apellido " + apellido);
+        //System.out.println("correo " + correo);
 
-        System.out.println("nombre " + nombre);
-        System.out.println("cedula " + cedula);
-        System.out.println("direccion " + direccion);
+        //System.out.println("nombre " + nombre);
+        //System.out.println("cedula " + cedula);
+        //System.out.println("direccion " + direccion);
         String id = "1";
 
         // Agrega el nuevo contacto al directorio
@@ -68,10 +69,10 @@ public class SvAgregar extends HttpServlet {
         ArrayList<Contacto> contactos = directorio.obtenerContactos();
         
         
-        System.out.println("Lista de contactos:");
-        for (Contacto contacto : contactos) {
-            System.out.println(contacto.getNombre() + " --- " + contacto.getApellido() + " - " + contacto.getCorreo());
-        }
+        //System.out.println("Lista de contactos:");
+        //for (Contacto contacto : contactos) {
+        //    System.out.println(contacto.getNombre() + " --- " + contacto.getApellido() + " - " + contacto.getCorreo());
+        //}
         // Establecer la lista de contactos como un atributo en el request
         request.setAttribute("contactos", contactos);
         
