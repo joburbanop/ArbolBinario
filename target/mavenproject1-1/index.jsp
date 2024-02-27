@@ -105,10 +105,13 @@
                                     </h5>
                                     <p class="card-text"><strong>Correo: </strong>  <%= concargar.getCorreo()%></p>
                                     <p class="card-text"><strong>Celular: </strong>  <%= concargar.getCelular()%></p>
-                                    <a href="#" class="btn btn-danger btn-sm"  >
-                                        <i class="fas fa-trash"></i>   
 
+
+                                    <a href="#" class="btn btn-danger btn-sm btnEliminar" data-eliminar="<%= concargar.getNombre()%>" type="button" onclick="eliminar('<%=concargar.getNombre()%>')">
+                                        <i class="fas fa-trash"></i>
                                     </a>
+
+
                                     <a href="#" class="btn btn-primary btn-sm btn-ojo" data-nombre="<%= concargar.getNombre()%>">
                                         <span class="fas fa-eye"></span>
                                     </a>
@@ -116,6 +119,25 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="modal fade" id="Eliminar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="eliminarLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="popup">
+                                        <div class="close-btn btn-close" data-bs-dismiss="modal">&times;</div>
+                                        <div class="form">
+                                            <div id="user-details">
+                                                <h2>¿Seguro que quieres eliminar este contacto?</h2>
+                                                <div class="form-element" style="display: flex; justify-content: space-between;">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="margin-right: 10px;">Cancelar</button>
+                                                    <button type="button" class="btn btn-danger" style="margin-left: 10px;" onclick="eliminar()">Eliminar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <%
                             }
                         } else {

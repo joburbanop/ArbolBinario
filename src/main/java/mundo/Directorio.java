@@ -4,6 +4,11 @@
  */
 package mundo;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -16,6 +21,8 @@ public class Directorio {
     /*---------------------------------------------------------------------------------
     *Atributos
     *-----------------------------------------------------------------------------------*/
+
+    
     private ArrayList<Contacto> contactos = new ArrayList<>();
 
     /**
@@ -43,7 +50,7 @@ public class Directorio {
      */
     public void agregarContacto(String id, String celular, String nombre, String apellido, String correo, String cedula, String direccion) {
         Contacto c = new Contacto(id, celular, nombre, apellido, correo, cedula, direccion);
-
+        
         if (contactoRaiz == null) {
             System.out.println("cabeza");
             System.out.println();
@@ -57,6 +64,7 @@ public class Directorio {
         numContactos++;
 
     }
+
 
     /**
      *
@@ -111,8 +119,11 @@ public class Directorio {
         }
     }
 
-    public void eliminarContacto(String id) {
-
+    public void eliminarContacto( String nombre )
+    {
+        contactoRaiz = contactoRaiz.eliminar( nombre );
+        numContactos--;
+        
     }
 
     public Contacto visualizarDatos() {
@@ -123,6 +134,8 @@ public class Directorio {
     public void agregarContacto(Contacto contacto) {
         contactos.add(contacto);
     }
+
+    
 
     // Método para obtener la lista de contactos
     public ArrayList<Contacto> obtenerContactos() {

@@ -151,7 +151,40 @@ public class Contacto implements Comparable<Contacto> {
         //System.out.println(this.nombre.compareToIgnoreCase(otro.getNombre()));
         return this.nombre.compareToIgnoreCase(otro.getNombre());
     }
-
+        public boolean esHoja( )
+    {
+        return izquierda == null && derecha == null;
+    }
+            public Contacto darMenor( )
+    {
+        return ( izquierda == null ) ? this : izquierda.darMenor( );
+    }
+    public Contacto eliminar( String unNombre )
+    {
+        if( esHoja( ) )
+            // Tiene que ser el elemento que estamos buscando
+            return null;
+        if( nombre.compareToIgnoreCase( unNombre ) == 0 )
+        {
+            if( izquierda == null )
+                return derecha;
+            if( derecha == null )
+                return izquierda;
+            // Localiza el menor contacto del sub�rbol derecho
+            Contacto sucesor = derecha.darMenor( );
+            // Elimina del sub�rbol derecho el elemento que acaba de localizar
+            derecha = derecha.eliminar( sucesor.getNombre( ) );
+            // Deja el elemento localizado en la ra�z del �rbol de respuesta
+            sucesor.izquierda = izquierda;
+            sucesor.derecha = derecha;
+            return sucesor;
+        }
+        else if( nombre.compareToIgnoreCase( unNombre ) > 0 )
+            izquierda = izquierda.eliminar( unNombre );
+        else
+            derecha = derecha.eliminar( unNombre );
+        return this;
+    }
     
     
 
