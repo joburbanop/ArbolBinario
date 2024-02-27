@@ -1,20 +1,27 @@
-/* 
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/JavaScript.js to edit this template
- */
-
-
-// RF2 - Mostrar modal con datos de contacto
 $(document).ready(function () {
+    $(".btnEliminar").click(function () {
+        console.log("oli");
+        var eliminar = $(this);
+        var eliminarNombre = eliminar.data("eliminar");
+        console.log("oliii jeje", eliminarNombre);
+        $.ajax({
+            url: "SvEliminar?nombreContacto=" + eliminarNombre,
+            method: "POST",
+            success: function (response) {
+                // Manejar la respuesta exitosa si es necesario
+            },
+            error: function (error) {
+                console.error("Error al eliminar el contacto:", error);
+            }
+        });
+    });
 
-// Agregar evento de clic al botón del ojo
     $(".btn-ojo").click(function () {
         var botonOjo = $(this);
         var nombreContacto = botonOjo.data("nombre");
         console.log(nombreContacto);
         $.ajax({
-            
-            url: 'SvBuscar?nombreContacto=' + nombreContacto,              
+            url: 'SvBuscar?nombreContacto=' + nombreContacto,
             method: 'POST',
             success: function (response) {
                 // Mostrar los detalles del contacto en el modal
@@ -35,6 +42,7 @@ $(document).ready(function () {
         // Llamar a la función para mostrar el modal
         mostrarModal();
     });
+
     // Función para mostrar el modal
     function mostrarModal() {
         $("#modal").modal("show");
@@ -43,10 +51,9 @@ $(document).ready(function () {
     $('.close').on('click', function () {
         $('#modal').modal('hide');
     });
-});
-// RF3 - resaltar en la lista 
-$("#contactos .contact-card").click(function () {
 
-
-
+    // La función eliminar ahora está dentro de $(document).ready()
+    function Eliminar(Nombre) {
+        $("#Eliminar").modal("show");
+    }
 });

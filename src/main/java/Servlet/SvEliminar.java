@@ -11,45 +11,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import mundo.Directorio;
 
 /**
  *
- * @author jonathan
+ * @author Lenovo
  */
-@WebServlet(name = "SvAgregar", urlPatterns = {"/SvAgregar"})
-public class SvAgregar extends HttpServlet {
+@WebServlet(name = "SvEliminar", urlPatterns = {"/SvEliminar"})
+public class SvEliminar extends HttpServlet {
 
-  private Directorio directorio;  
- @Override
-     /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-         response.setContentType("text/html;charset=UTF-8");
-         
-         String nombre = request.getParameter("nombre");
-        String apellido = request.getParameter("apellido");
-        String correo = request.getParameter("correo");
-        String id = request.getParameter("id");
-        String celular = request.getParameter("celular");
-        String direccion = request.getParameter("direccion");
-       
-    
-      directorio.agregarContacto(nombre, id, celular, apellido, correo, direccion);
-        
-      response.sendRedirect("index.jsp");
-                
-                
-    }
-    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -67,10 +36,10 @@ public class SvAgregar extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SvAgregar</title>");            
+            out.println("<title>Servlet SvEliminar</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SvAgregar at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SvEliminar at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -91,8 +60,24 @@ public class SvAgregar extends HttpServlet {
         processRequest(request, response);
     }
 
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-   
+        System.out.println("EJEJJE oliSV");
+
+        String nombre = request.getParameter("nombreContacto");
+        System.out.println("jejeje si" + nombre);
+
+    }
 
     /**
      * Returns a short description of the servlet.
