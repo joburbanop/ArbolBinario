@@ -7,6 +7,7 @@ package Servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import mundo.Contacto;
 import mundo.Directorio;
+import mundo.Serializacion;
 
 /**
  *
@@ -52,6 +54,8 @@ public class SvAgregar extends HttpServlet {
         String cedula = request.getParameter("cedula");
         String direccion = request.getParameter("direccion");
 
+                //Obtener el contexto del servlet
+        ServletContext context = getServletContext();
         //System.out.println("celular " + celular);
         //System.out.println("apellido " + apellido);
         //System.out.println("correo " + correo);
@@ -64,6 +68,7 @@ public class SvAgregar extends HttpServlet {
         // Agrega el nuevo contacto al directorio
         directorio.agregarContacto(id, String.valueOf(celular), nombre, apellido, correo, String.valueOf(cedula), direccion);
         
+        Serializacion.escribirArchivoContactos(directorio, context);
         
         // Obtener la lista de contactos del directorio
         ArrayList<Contacto> contactos = directorio.obtenerContactos();

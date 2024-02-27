@@ -4,13 +4,16 @@
  */
 package mundo;
 
+import java.io.Serializable;
+import java.text.Collator;
 import java.util.Collection;
+import java.util.Locale;
 
 /**
  *
  * @author jonathan
  */
-public class Contacto implements Comparable<Contacto> {
+public class Contacto implements Comparable<Contacto> , Serializable{
 
     /*-------------------------------------------------
      * Atributos 
@@ -159,32 +162,50 @@ public class Contacto implements Comparable<Contacto> {
     {
         return ( izquierda == null ) ? this : izquierda.darMenor( );
     }
-    public Contacto eliminar( String unNombre )
-    {
-        if( esHoja( ) )
-            // Tiene que ser el elemento que estamos buscando
-            return null;
-        if( nombre.compareToIgnoreCase( unNombre ) == 0 )
-        {
-            if( izquierda == null )
-                return derecha;
-            if( derecha == null )
-                return izquierda;
-            // Localiza el menor contacto del sub�rbol derecho
-            Contacto sucesor = derecha.darMenor( );
-            // Elimina del sub�rbol derecho el elemento que acaba de localizar
-            derecha = derecha.eliminar( sucesor.getNombre( ) );
-            // Deja el elemento localizado en la ra�z del �rbol de respuesta
-            sucesor.izquierda = izquierda;
-            sucesor.derecha = derecha;
-            return sucesor;
+public Contacto eliminar(String unNombre) {
+    Collator collator = Collator.getInstance(new Locale("es", "ES"));
+
+    // Compara los nombres de manera sensible a la localización
+
+    // Elimina los símbolos y las tildes
+    nombre = nombre.replaceAll("[^\\p{ASCII}]", "");
+
+    int comparacion = collator.compare(nombre, unNombre);
+
+    if (comparacion == 0) {
+        // Si la raíz coincide con el nombre a eliminar
+        if (izquierda == null) {
+            // Si el hijo izquierdo es nulo, devuelve el hijo derecho como nueva raíz
+            return derecha;
+        } else if (derecha == null) {
+            // Si el hijo derecho es nulo, devuelve el hijo izquierdo como nueva raíz
+            return izquierda;
+        } else {
+            // Si la raíz tiene ambos hijos, encuentra el sucesor en el subárbol derecho
+            Contacto sucesor = derecha.darMenor();
+            // Actualiza los datos de la raíz con los del sucesor
+            nombre = sucesor.getNombre();
+            apellido = sucesor.getApellido();
+            celular = sucesor.getCelular();
+            direccion = sucesor.getDireccion();
+            correo = sucesor.getCorreo();
+            // Elimina el sucesor del subárbol derecho
+            derecha = derecha.eliminar(sucesor.getNombre());
+            return this;
         }
-        else if( nombre.compareToIgnoreCase( unNombre ) > 0 )
-            izquierda = izquierda.eliminar( unNombre );
-        else
-            derecha = derecha.eliminar( unNombre );
-        return this;
+    } else if (comparacion > 0) {
+        // Si el nombre a eliminar es menor que el nombre de la raíz, busca en el subárbol izquierdo
+        if (izquierda != null) {
+            izquierda = izquierda.eliminar(unNombre);
+        }
+    } else {
+        // Si el nombre a eliminar es mayor que el nombre de la raíz, busca en el subárbol derecho
+        if (derecha != null) {
+            derecha = derecha.eliminar(unNombre);
+        }
     }
+    return this;
+}
     
     
 

@@ -4,6 +4,7 @@
     Author     : jonathan
 --%>
 
+<%@page import="mundo.Serializacion"%>
 <%@page import="mundo.Contacto"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="mundo.Directorio"%>
@@ -91,7 +92,14 @@
                     <!-- ********************************************************** -->
                     <div id="contactos" class="row">
                         <%
-                            ArrayList<Contacto> contactos = (ArrayList<Contacto>) request.getAttribute("contactos");
+                            Directorio directorio = new Directorio();
+
+                            //Obtener el contexto del servlet
+                            ServletContext context = getServletContext();
+                            directorio = Serializacion.leerArchivoContactos(context);
+                            // Obtener la lista de contactos del directorio
+                            ArrayList<Contacto> contactos = directorio.obtenerContactos();
+
                             //System.out.println("DESDE INDE.JSP");
                             //System.out.println(contactos != null);
                             if (contactos != null) {

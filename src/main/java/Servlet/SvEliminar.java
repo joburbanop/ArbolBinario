@@ -6,11 +6,16 @@ package Servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import mundo.Directorio;
+import mundo.Serializacion;
 
 /**
  *
@@ -60,23 +65,31 @@ public class SvEliminar extends HttpServlet {
         processRequest(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    Directorio listaContactos = new Directorio();
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        System.out.println("EJEJJE oliSV");
+        System.out.println("Metodo para eliminar");
 
         String nombre = request.getParameter("nombreContacto");
         System.out.println("jejeje si" + nombre);
-
+                        //Obtener el contexto del servlet
+        ServletContext context = getServletContext();
+        try {
+            listaContactos = Serializacion.leerArchivoContactos(context);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SvEliminar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("Elimina");
+        listaContactos.eliminarContacto(nombre);
+        
+        Serializacion.escribirArchivoContactos(listaContactos, context);
+        
+        System.out.println("Si elimino");
+               // Redirecciona al archivo index.jsp
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
     /**
