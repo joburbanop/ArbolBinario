@@ -17,6 +17,28 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;700&display=swap" rel="stylesheet">   
         <link href="./static/css/style.css" rel="stylesheet">
+        <style>
+
+            .highlight {
+                background-color: #ffddcc;
+                color: #333;
+
+                border: none;
+                outline: 5px solid #ff6b4f;
+                outline-offset: -5px;
+
+                box-shadow: 0 0 10px rgba(255, 107, 79, 0.5);
+
+                transform: scale(1.05);
+                transition: all 0.3s ease;
+            }
+
+            .highlight:hover {
+                transform: scale(1.1);
+                box-shadow: 0 0 20px rgba(255, 107, 79, 0.7);
+            }
+           
+        </style>
     </head>
 
     <body>
@@ -79,11 +101,12 @@
                     <div class="input-group mb-3 animate__animated animate__fadeInUp">
 
                         <div class="input-group">
-                            <input id="" class="form-control rounded-0" type="text" placeholder="Buscar contacto..." >
-                            <button id="" class="btn btn-primary rounded-0 search-btn">
+                            <input id="search-input" class="form-control rounded-0" type="text" placeholder="Buscar contacto...">
+                            <button class="btn btn-primary rounded-0 search-btn">
                                 <i class="fas fa-search"></i>
                             </button>
                         </div>
+
                     </div>
 
                     <!-- ********************************************************** -->

@@ -1,4 +1,48 @@
 $(document).ready(function () {
+
+    // Cuando se hace clic en el botón de búsqueda
+    $('.search-btn').click(function () {
+
+        // Obtener término de búsqueda
+        var searchTerm = $('#search-input').val().trim().toLocaleLowerCase();
+        console.log("Buscar término: " + searchTerm);
+
+        // Variable para rastrear si se encontró alguna coincidencia
+        var coincidenciaEncontrada = false;
+
+        // Recorrer tarjetas
+        $('.contact-card').each(function () {
+
+            // Obtener nombre
+            var name = $(this).find('.card-title').text().trim().toLocaleLowerCase();
+            console.log("Nombre: " + name);
+
+            // Verificar coincidencia
+            if (name.includes(searchTerm)) {
+                // Resaltar tarjeta
+                console.log("Coincidencia encontrada");
+                $(this).addClass('highlight');
+                // Variable para rastrear si se encontró alguna coincidencia
+                coincidenciaEncontrada = true;
+            } else {
+
+                console.log("No hay coincidencia");
+                $(this).removeClass('highlight');
+
+            }
+
+        });
+
+        // Mostrar alerta si no se encontró ninguna coincidencia
+        if (!coincidenciaEncontrada) {
+            alert('No se encontraron resultados para la búsqueda.');
+        }
+
+    });
+
+
+
+    //Funcion para tenectar el el evento eliminar
     $(".btnEliminar").click(function () {
         console.log("oli");
         var eliminar = $(this);
@@ -16,6 +60,7 @@ $(document).ready(function () {
         });
     });
 
+    //FUncion creada para detectar el lemento ver
     $(".btn-ojo").click(function () {
         var botonOjo = $(this);
         var nombreContacto = botonOjo.data("nombre");

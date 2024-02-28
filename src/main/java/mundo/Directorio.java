@@ -71,6 +71,9 @@ public class Directorio {
      * @param nuevo
      */
     public void insertar(Contacto actual, Contacto nuevo) {
+        if(nuevo.compareTo(actual)==0){
+            return;
+        }
 
         //System.out.println("insertar ya estamos ");
         if (nuevo.compareTo(actual) <= 0) {
