@@ -39,12 +39,12 @@ public class SvBuscar extends HttpServlet {
         //System.out.println("hola desde sv buscar");
         String nombreContacto = request.getParameter("nombreContacto");
 
-        //System.out.println("hola desde sv buscar " + nombreContacto);
+        System.out.println("hola desde sv buscar " + nombreContacto);
         Contacto dir = Directorio.buscar(Directorio.contactoRaiz, nombreContacto);
 
-        //System.out.println("Nombre " + dir.getNombre());
-        //System.out.println("CELULAR " + dir.getCelular());
-        //System.out.println("cedula " + dir.getCedula());
+        System.out.println("Nombre " + dir.getNombre());
+        System.out.println("CELULAR " + dir.getCelular());
+        System.out.println("cedula " + dir.getCedula());
         // Crear un objeto JSON con la información del contacto
         StringBuilder jsonResponse = new StringBuilder();
         jsonResponse.append("{");

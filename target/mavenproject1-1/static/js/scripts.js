@@ -101,4 +101,5 @@ $(document).ready(function () {
     function Eliminar(Nombre) {
         $("#Eliminar").modal("show");
     }
+    
 });

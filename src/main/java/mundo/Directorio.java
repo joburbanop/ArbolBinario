@@ -9,6 +9,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -16,14 +17,12 @@ import java.util.Collection;
  *
  * @author jonathan
  */
-public class Directorio {
+public class Directorio implements Serializable {
 
     /*---------------------------------------------------------------------------------
     *Atributos
     *-----------------------------------------------------------------------------------*/
-
-    
-    private ArrayList<Contacto> contactos = new ArrayList<>();
+    private static ArrayList<Contacto> contactos = new ArrayList<>();
 
     /**
      * Raiz del arbol de contactos presentes en el directorio
@@ -50,7 +49,7 @@ public class Directorio {
      */
     public void agregarContacto(String id, String celular, String nombre, String apellido, String correo, String cedula, String direccion) {
         Contacto c = new Contacto(id, celular, nombre, apellido, correo, cedula, direccion);
-        
+
         if (contactoRaiz == null) {
             System.out.println("cabeza");
             System.out.println();
@@ -65,13 +64,12 @@ public class Directorio {
 
     }
 
-
     /**
      *
      * @param nuevo
      */
     public void insertar(Contacto actual, Contacto nuevo) {
-        if(nuevo.compareTo(actual)==0){
+        if (nuevo.compareTo(actual) == 0) {
             return;
         }
 
@@ -107,27 +105,29 @@ public class Directorio {
      * @return contacto asociado al nombre. Si no lo encuentra retorna null;
      */
     public static Contacto buscar(Contacto actual, String unNombre) {
-       
+
         if (actual == null || actual.getNombre().compareToIgnoreCase(unNombre) == 0) {
             return actual;
         }
 
-        
         if (actual.getNombre().compareToIgnoreCase(unNombre) > 0) {
             return buscar(actual.getIzquierda(), unNombre);
 
-        } 
-        else {
+        } else {
             return buscar(actual.getDerecha(), unNombre);
         }
     }
 
-    public void eliminarContacto( String nombre )
-    {
-        contactoRaiz = contactoRaiz.eliminar( nombre );
-        numContactos--;
-        
+    /**
+     * Indica si este nodo es una hoja
+     *
+     * @return true si este nodo es una hoja y false en caso contrario
+     */
+    public boolean esHoja() {
+        return contactoRaiz.getIzquierda() == null && contactoRaiz.getDerecha() == null;
     }
+
+
 
     public Contacto visualizarDatos() {
         return null;
@@ -138,10 +138,8 @@ public class Directorio {
         contactos.add(contacto);
     }
 
-    
-
     // Método para obtener la lista de contactos
-    public ArrayList<Contacto> obtenerContactos() {
+    public static ArrayList<Contacto> obtenerContactos() {
         return contactos;
     }
 

@@ -4,6 +4,7 @@
     Author     : jonathan
 --%>
 
+<%@page import="mundo.Serializacion"%>
 <%@page import="mundo.Contacto"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="mundo.Directorio"%>
@@ -37,7 +38,7 @@
                 transform: scale(1.1);
                 box-shadow: 0 0 20px rgba(255, 107, 79, 0.7);
             }
-           
+
         </style>
     </head>
 
@@ -114,7 +115,14 @@
                     <!-- ********************************************************** -->
                     <div id="contactos" class="row">
                         <%
-                            ArrayList<Contacto> contactos = (ArrayList<Contacto>) request.getAttribute("contactos");
+                            Directorio directorio = new Directorio();
+
+                            //Obtener el contexto del servlet
+                            ServletContext context = getServletContext();
+                            directorio = Serializacion.leerArchivoContactos(context);
+                            // Obtener la lista de contactos del directorio
+                            ArrayList<Contacto> contactos = directorio.obtenerContactos();
+
                             //System.out.println("DESDE INDE.JSP");
                             //System.out.println(contactos != null);
                             if (contactos != null) {
@@ -130,7 +138,7 @@
                                     <p class="card-text"><strong>Celular: </strong>  <%= concargar.getCelular()%></p>
 
 
-                                    <a href="#" class="btn btn-danger btn-sm btnEliminar" data-eliminar="<%= concargar.getNombre()%>" type="button" onclick="eliminar('<%=concargar.getNombre()%>')">
+                                    <a href="#" class="btn btn-danger btn-sm btnEliminar" data-eliminar="<%= concargar.getNombre()%>" >
                                         <i class="fas fa-trash"></i>
                                     </a>
 
